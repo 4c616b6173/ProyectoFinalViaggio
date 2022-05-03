@@ -27,9 +27,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'about_me' %}">About Me</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'about_creator' %}">About developer</a></li>
                         <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#signup">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#signup">Contacto</a></li>
                     </ul>
                 </div>
             </div>
@@ -41,7 +42,7 @@
                     <div class="text-center">
                         <h1 class="mx-auto my-0 text-uppercase">Jeremias Randazzo</h1>
                         <h2 class="text-white-50 mx-auto mt-2 mb-5">Fotografía urbana.</h2>
-                        <a class="btn btn-primary" href="#about">Saber más.</a>
+                        <a class="btn btn-primary" href="{% url 'about_me' %}">Saber sobre <br>artista.</a> <a class="btn btn-primary" href="{% url 'about_creator' %}">Saber sobre <br> developer.</a>
                     </div>
                 </div>
             </div>
@@ -77,11 +78,11 @@
                 </div>
                 <!-- Project One Row-->
                 <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
-                    <div class="col-lg-6"><img class="img-fluid" src="{% static 'appBlog/assets/img/feli.jpg' %}" alt="..." /></div>
+                    <div class="col-lg-6"><img class="img-fluid" src="{% static 'appBlog/assets/img/feli700x500.jpg' %}" alt="..." /></div>
                     <div class="col-lg-6">
                         <div class="bg-black text-center h-100 project">
                             <div class="d-flex h-100">
-                                <div class="project-text w-100 my-auto text-center text-lg-left">
+                                <div class="project-text w-80 my-auto text-center text-lg-left">
                                     <h4 class="text-white">Misty</h4>
                                     <p class="mb-0 text-white-50">An example of where you can put an image of a project, or anything else, along with a description.</p>
                                     <hr class="d-none d-lg-block mb-0 ms-0" />
@@ -92,7 +93,7 @@
                 </div>
                 <!-- Project Two Row-->
                 <div class="row gx-0 justify-content-center">
-                    <div class="col-lg-6"><img class="img-fluid" src="{% static 'appBlog/assets/img/388.jpg' %}" alt="..." /></div>
+                    <div class="col-lg-6"><img class="img-fluid" src="{% static 'appBlog/assets/img/388700x500.jpg' %}" alt="..." /></div>
                     <div class="col-lg-6 order-lg-first">
                         <div class="bg-black text-center h-100 project">
                             <div class="d-flex h-100">
@@ -109,79 +110,65 @@
         </section>
         <!-- Signup-->
         <section class="signup-section" id="signup">
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5">
-                    <div class="col-md-10 col-lg-8 mx-auto text-center">
-                        <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
-                        <h2 class="text-white mb-5">Subscribe to receive updates!</h2>
-                        <!-- * * * * * * * * * * * * * * *-->
-                        <!-- * * SB Forms Contact Form * *-->
-                        <!-- * * * * * * * * * * * * * * *-->
-                        <!-- This form is pre-integrated with SB Forms.-->
-                        <!-- To make this form functional, sign up at-->
-                        <!-- https://startbootstrap.com/solution/contact-forms-->
-                        <!-- to get an API token!-->
-                        <form class="form-signup" id="contactForm" data-sb-form-api-token="API_TOKEN">
-                            <!-- Email address input-->
-                            <div class="row input-group-newsletter">
-                                <div class="col"><input class="form-control" id="emailAddress" type="email" placeholder="Enter email address..." aria-label="Enter email address..." data-sb-validations="required,email" /></div>
-                                <div class="col-auto"><button class="btn btn-primary disabled" id="submitButton" type="submit">Notify Me!</button></div>
-                            </div>
-                            <div class="invalid-feedback mt-2" data-sb-feedback="emailAddress:required">An email is required.</div>
-                            <div class="invalid-feedback mt-2" data-sb-feedback="emailAddress:email">Email is not valid.</div>
-                            <!-- Submit success message-->
-                            <!---->
-                            <!-- This is what your users will see when the form-->
-                            <!-- has successfully submitted-->
-                            <div class="d-none" id="submitSuccessMessage">
-                                <div class="text-center mb-3 mt-2 text-white">
-                                    <div class="fw-bolder">Form submission successful!</div>
-                                    To activate this form, sign up at
-                                    <br />
-                                    <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                                </div>
-                            </div>
-                            <!-- Submit error message-->
-                            <!---->
-                            <!-- This is what your users will see when there is-->
-                            <!-- an error submitting the form-->
-                            <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3 mt-2">Error sending message!</div></div>
-                        </form>
-                    </div>
-                </div>
+            <div class="col-md-10 col-lg-8 mx-auto text-center">
+                <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
             </div>
+            <h2 class="text-white mb-5 text-center">Reserva ahora!</h2>
+            <center>
+                <body  class="text-white">
+                    {% if reservasF.errors %}
+
+                    <p style="color: red;">Los datos ingresados son incorrectos.</p>
+
+                    {% endif %}
+
+                    <form action="" method="POST">{% csrf_token %}
+
+                        <table style="text-align: center;">
+
+                        {{ reservasF.as_table }}
+
+                        </table>
+
+                        <input type="submit" value="Enviar">
+
+                    </form>
+                </body>
+            </center>
+            
         </section>
         <!-- Contact-->
         <section class="contact-section bg-black">
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5">
+                    <h2 class="text-white mb-5 text-center">Contacto directo!</h2>
                     <div class="col-md-4 mb-3 mb-md-0">
                         <div class="card py-4 h-100">
                             <div class="card-body text-center">
-                                <i class="fas fa-map-marked-alt text-primary mb-2"></i>
+                                <i class="fas fa-brands fa-instagram fa-3x text-primary mb-2"></i>
                                 <h4 class="text-uppercase m-0">Address</h4>
                                 <hr class="my-4 mx-auto" />
-                                <div class="small text-black-50">4923 Market Street, Orlando FL</div>
+                                <div class="big text-black-50"><a href="https://www.instagram.com/jere.randa/">Instagram</a></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4 mb-3 mb-md-0">
                         <div class="card py-4 h-100">
                             <div class="card-body text-center">
-                                <i class="fas fa-envelope text-primary mb-2"></i>
+                                <i class="fas fa-envelope fa-3x text-primary mb-2"></i>
                                 <h4 class="text-uppercase m-0">Email</h4>
                                 <hr class="my-4 mx-auto" />
-                                <div class="small text-black-50"><a href="#!">hello@yourdomain.com</a></div>
+                                <div class="big text-black-50"><a href="mailto:matiasviaggio59@gmail.com? Subject=Contacto">Enviar un mail.</a></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4 mb-3 mb-md-0">
                         <div class="card py-4 h-100">
                             <div class="card-body text-center">
-                                <i class="fas fa-mobile-alt text-primary mb-2"></i>
+                                <i class="fas fa-mobile-alt fa-3x text-primary mb-2"></i>
                                 <h4 class="text-uppercase m-0">Phone</h4>
                                 <hr class="my-4 mx-auto" />
-                                <div class="small text-black-50">+1 (555) 902-8832</div>
+                                <div class="big text-black-50"><a href='#!'>+54 9 (2323) 634265</a></div>
                             </div>
                         </div>
                     </div>

@@ -4141,8 +4141,7 @@ textarea.form-control-lg {
   display: block;
 }
 
-.navbar {
-  position: relative;
+.navbar{
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -4150,6 +4149,8 @@ textarea.form-control-lg {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
+
+
 .navbar > .container,
 .navbar > .container-fluid,
 .navbar > .container-sm,
