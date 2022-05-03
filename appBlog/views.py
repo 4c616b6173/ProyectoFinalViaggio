@@ -1,7 +1,8 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 
-from appBlog.forms import ReservasFormulario
-from appBlog.models import Reservas
+from appBlog.forms import CursoFormulario, EstudianteFormulario, ReservasFormulario
+from appBlog.models import Curso, Estudiante, Reservas
 
 # Create your views here.
 def home(request):
@@ -19,18 +20,79 @@ def home(request):
 
             reservas.save()
 
-            return render(request, "home.html")
+            return render(request, "vuelveAlInicio.html")
         
     else:
 
         reservasF = ReservasFormulario()
-    return render(request, 'home.html', {'reservasF':reservasF})
+    return render(request, 'index.html', {'reservasF':reservasF})
 
-def about_creator(request):
-    return render(request, 'about_creator.html')
+def about_developer(request):
+    return render(request, 'about_developer.html')
 
 def about_me(request):
     return render(request, 'about_me.html')
 
-def prueba(request):
-    return render(request, 'prueba.html')
+def serEstudiante(request):
+    if request.method == 'POST':
+
+        estudiantesF = EstudianteFormulario(request.POST)
+
+        print(estudiantesF)
+
+        if estudiantesF.is_valid():
+
+            informacion = estudiantesF.cleaned_data
+
+            estudiantes = Estudiante(nombre=informacion['nombre'], apellido=informacion['apellido'], correo=informacion['correo'], edad=informacion['edad'])
+
+            estudiantes.save()
+
+            return render(request, "vuelveAlInicio.html")
+        
+    else:
+
+        estudiantesF = EstudianteFormulario()
+    return render(request, 'serEstudiante.html', {'estudiantesF':estudiantesF})
+
+def addCursos(request):
+    if request.method == 'POST':
+
+        cursoF = CursoFormulario(request.POST)
+
+        print(cursoF)
+
+        if cursoF.is_valid():
+
+            informacion = cursoF.cleaned_data
+
+            curso = Curso(nombre=informacion['nombre'], codigo=informacion['codigo'], duracion=informacion['duracion'])
+
+            curso.save()
+
+            return render(request, "vuelveAlInicio.html")
+        
+    else:
+
+        cursoF = CursoFormulario()
+    return render(request, 'addCursos.html', {'cursoF':cursoF})
+
+def busquedaCodigo(request):
+    
+    return render(request, 'addCursos.html')
+
+
+def buscar(request):
+
+    if request.GET['codigo']:
+        
+        codigo = request.GET['codigo']
+
+        cursos = Curso.objects.filter(codigo__icontains=codigo)
+        
+        return render(request, 'resultadoBusqueda.html', {'cursos':cursos, 'codigo':codigo})
+    else:
+        respuesta = 'No eviaste datos'
+
+    return HttpResponse(respuesta)
+    

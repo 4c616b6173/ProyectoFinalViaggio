@@ -1,0 +1,44 @@
+{% extends 'blankPadre.html' %}
+
+{% load static %}
+
+{% block contenidoblock %}
+
+
+    {% if cursoF.errors %}
+
+    <p style="color: red;">Los datos ingresados son incorrectos.</p>
+
+    {% endif %}
+
+    <h2 style="color: white; font-size: x-large; font-style: oblique; font-family: 'Franklin Gothic Medium';">
+        Agrega un curso:
+    </h2>
+
+    <form action="" method="POST">{% csrf_token %}
+
+        <table style="text-align: center;">
+
+        {{ cursoF.as_table }}
+
+        </table>
+
+    <input type="submit" value="Enviar">
+
+    </form>
+
+{% endblock %}
+
+{% block buscarCodigo %}
+
+<h2 style="color: white; font-size: x-large; font-style: oblique; font-family: 'Franklin Gothic Medium';">
+    Buscar curso por codigo:
+</h2>
+<form action="buscar/" method="GET">
+    <input type="number" name="codigo" id="codigo">
+
+    <input type="submit" value="Buscar">
+</form>
+
+
+{% endblock %}

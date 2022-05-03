@@ -15,7 +15,5 @@ class Estudiante(models.Model):
 
 class Curso(models.Model):
     nombre = models.CharField(max_length=40)
-    apellido = models.CharField(max_length=40)
-    correo = models.EmailField()
-    edad = models.IntegerField(default=0)
+    codigo = models.IntegerField(default=0)
     duracion = models.IntegerField(default=3)

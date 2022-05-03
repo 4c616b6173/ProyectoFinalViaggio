@@ -1,0 +1,25 @@
+{% extends 'padreSerEst.html' %}
+
+{% load static %}
+
+{% block estudiantes %}
+
+    {% if estudiantesF.errors %}
+
+    <p style="color: red;">Los datos ingresados son incorrectos.</p>
+
+    {% endif %}
+
+    <form action="" method="POST">{% csrf_token %}
+
+        <table style="text-align: center;">
+
+        {{ estudiantesF.as_table }}
+
+        </table>
+
+    <input type="submit" value="Enviar">
+
+    </form>
+
+{% endblock %}
