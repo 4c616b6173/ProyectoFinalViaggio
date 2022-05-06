@@ -7895,7 +7895,7 @@ textarea.form-control-lg {
 /* rtl:end:remove */
 .text-primary {
   --bs-text-opacity: 1;
-  color: rgba(var(--bs-primary-rgb), var(--bs-text-opacity)) !important;
+  color: orangered !important;
 }
 
 .text-secondary {
@@ -8016,7 +8016,7 @@ textarea.form-control-lg {
 
 .bg-light {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+  background: linear-gradient(rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.9) 75%, rgb(0, 0, 0) 100%) !important;
 }
 
 .bg-dark {
@@ -11615,6 +11615,7 @@ body {
 
 .projects-section {
   padding: 10rem 0;
+  background: #323232;
 }
 .projects-section .featured-text {
   padding: 2rem;
@@ -11660,7 +11661,12 @@ body {
 }
 
 .contact-section {
-  padding-top: 5rem;
+  padding-top: 8rem;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.5) 75%, #000 100%), url("../assets/img/santi3840.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
 }
 .contact-section .card {
   border: 0;
@@ -11697,5 +11703,5 @@ body {
 }
 
 .footer {
-  padding: 5rem 0;
+  padding: 3rem 0;
 }
