@@ -55,9 +55,7 @@ ROOT_URLCONF = 'blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['C:/Users/matia/Documents/GitHub/ProyectoFinalViaggio/appBlog/templates/appBlog',
-        'C:/Users/matia/OneDrive/Documents/GitHub/ProyectoFinalViaggio/appBlog/templates/appBlog'
-        ],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

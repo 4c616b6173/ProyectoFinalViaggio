@@ -3,8 +3,8 @@ from appBlog import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('about_developer', views.about_developer, name='about_developer'),
-    path('about_me', views.about_me, name='about_me'),
+    path('aboutDeveloper', views.aboutDeveloper, name='aboutDeveloper'),
+    path('aboutMe', views.aboutMe, name='aboutMe'),
     path('serEstudiante', views.serEstudiante, name='serEstudiante'),
     path('addCursos', views.addCursos, name='addCursos'),
     path('buscar/', views.buscar),

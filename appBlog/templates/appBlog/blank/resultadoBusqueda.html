@@ -1,0 +1,19 @@
+{% extends 'appBlog/blank/blankPadre.html' %}
+
+{% load static %}
+
+{% block contenidoblock %}
+
+    <p>
+        Buscando: {{codigo}}
+    </p>
+    <ul>
+    {% for curso in cursos %}
+        <li>
+            {{curso.nombre}}
+            {{curso.codigo}}
+        </li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}

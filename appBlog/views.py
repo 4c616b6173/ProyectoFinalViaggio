@@ -20,18 +20,18 @@ def home(request):
 
             reservas.save()
 
-            return render(request, "vuelveAlInicio.html")
+            return render(request, "appBlog/blank/vuelveAlInicio.html")
         
     else:
 
         reservasF = ReservasFormulario()
-    return render(request, 'index.html', {'reservasF':reservasF})
+    return render(request, 'appBlog/homePage/index.html', {'reservasF':reservasF})
 
-def about_developer(request):
-    return render(request, 'about_developer.html')
+def aboutDeveloper(request):
+    return render(request, 'appBlog/about/aboutDeveloper.html')
 
-def about_me(request):
-    return render(request, 'about_me.html')
+def aboutMe(request):
+    return render(request, 'appBlog/about/aboutMe.html')
 
 def serEstudiante(request):
     if request.method == 'POST':
@@ -48,12 +48,12 @@ def serEstudiante(request):
 
             estudiantes.save()
 
-            return render(request, "vuelveAlInicio.html")
+            return render(request, "appBlog/blank/vuelveAlInicio.html")
         
     else:
 
         estudiantesF = EstudianteFormulario()
-    return render(request, 'serEstudiante.html', {'estudiantesF':estudiantesF})
+    return render(request, 'appBlog/serEstudiante/serEstudiante.html', {'estudiantesF':estudiantesF})
 
 def addCursos(request):
     if request.method == 'POST':
@@ -70,16 +70,16 @@ def addCursos(request):
 
             curso.save()
 
-            return render(request, "vuelveAlInicio.html")
+            return render(request, "appBlog/blank/vuelveAlInicio.html")
         
     else:
 
         cursoF = CursoFormulario()
-    return render(request, 'addCursos.html', {'cursoF':cursoF})
+    return render(request, 'appBlog/blank/addCursos.html', {'cursoF':cursoF})
 
 def busquedaCodigo(request):
     
-    return render(request, 'addCursos.html')
+    return render(request, 'appBlog/blank/addCursos.html')
 
 
 def buscar(request):
@@ -90,7 +90,7 @@ def buscar(request):
 
         cursos = Curso.objects.filter(codigo__icontains=codigo)
         
-        return render(request, 'resultadoBusqueda.html', {'cursos':cursos, 'codigo':codigo})
+        return render(request, 'appBlog/blank/resultadoBusqueda.html', {'cursos':cursos, 'codigo':codigo})
     else:
         respuesta = 'No eviaste datos'
 
