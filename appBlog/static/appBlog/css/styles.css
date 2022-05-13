@@ -8016,7 +8016,7 @@ textarea.form-control-lg {
 
 .bg-light {
   --bs-bg-opacity: 1;
-  background: linear-gradient(rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.9) 75%, rgb(0, 0, 0) 100%) !important;
+  background: #121212 !important;
 }
 
 .bg-dark {
@@ -11607,15 +11607,15 @@ body {
 
 .about-section {
   padding-top: 10rem;
-  background: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.9) 75%, rgba(0, 0, 0, 0.8) 100%);
+  background: #121212 !important;
 }
 .about-section p {
   margin-bottom: 5rem;
 }
 
 .projects-section {
-  padding: 10rem 0;
-  background: #323232;
+  padding: 15rem 0;
+  background: #121212 !important;
 }
 .projects-section .featured-text {
   padding: 2rem;
