@@ -6,6 +6,9 @@ from appBlog.models import Curso, Estudiante, Reservas
 
 # Create your views here.
 def home(request):
+    return render(request, 'appBlog/homePage/index.html')
+
+def apply(request):
     if request.method == 'POST':
 
         reservasF = ReservasFormulario(request.POST)
@@ -25,7 +28,10 @@ def home(request):
     else:
 
         reservasF = ReservasFormulario()
-    return render(request, 'appBlog/homePage/index.html', {'reservasF':reservasF})
+    return render(request, 'appBlog/apply/apply.html', {'reservasF':reservasF})
+
+def projects(request):
+    return render(request, 'appBlog/projects/projects.html')
 
 def aboutDeveloper(request):
     return render(request, 'appBlog/about/aboutDeveloper.html')
