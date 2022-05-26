@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-from appBlog.models import Curso, Estudiante, Reservas
+from appBlog.models import Curso, Estudiante, Reserva
 
 # Register your models here.
 
-admin.site.register(Reservas)
+admin.site.register(Reserva)
 
 admin.site.register(Estudiante)
 
