@@ -51,7 +51,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 
 body {
   margin: 0;
-  background: url("../images/bg.jpg");
+  background: url("../images/edificios.jpg");
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 1rem;
   font-weight: 400;
@@ -8157,7 +8157,7 @@ a {
   -webkit-transition: .3s all ease;
   -o-transition: .3s all ease;
   transition: .3s all ease;
-  color: #fbceb5; }
+  color: orangered; }
   a:hover, a:focus {
     text-decoration: none !important;
     outline: none !important;
@@ -8332,18 +8332,18 @@ textarea.form-control {
   .btn:hover, .btn:active, .btn:focus {
     outline: none; }
   .btn.btn-primary {
-    background: #fbceb5 !important;
+    background: orangered !important;
     border: 1px solid #fbceb5 !important;
     color: #000 !important; }
     .btn.btn-primary:hover {
       border: 1px solid #fbceb5;
       background: transparent;
-      color: #fbceb5; }
+      color: black; }
     .btn.btn-primary.btn-outline-primary {
       border: 1px solid #fbceb5;
       background: transparent;
       color: #fbceb5; }
       .btn.btn-primary.btn-outline-primary:hover {
         border: 1px solid transparent;
-        background: #fbceb5;
+        background: black;
         color: #fff; }
