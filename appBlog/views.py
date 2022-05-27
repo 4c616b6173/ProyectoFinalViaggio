@@ -3,6 +3,10 @@ from django.shortcuts import render
 
 from appBlog.forms import CursoFormulario, EstudianteFormulario, ReservasFormulario
 from appBlog.models import Curso, Estudiante, Reserva
+from django.views.generic import ListView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.detail import DetailView
+from django.urls import reverse_lazy
 
 # Create your views here.
 def home(request):
@@ -81,11 +85,11 @@ def adminCursos(request):
     else:
 
         cursoF = CursoFormulario()
-    return render(request, 'appBlog/blank/adminCursos.html', {'cursoF':cursoF})
+    return render(request, 'appBlog/adminCursos/adminCursos.html', {'cursoF':cursoF})
 
 def busquedaCodigo(request):
     
-    return render(request, 'appBlog/blank/adminCursos.html')
+    return render(request, 'appBlog/adminCursos/adminCursos.html')
 
 
 def buscar(request):
@@ -96,101 +100,183 @@ def buscar(request):
 
         cursos = Curso.objects.filter(codigo__icontains=codigo)
         
-        return render(request, 'appBlog/blank/resultadoBusqueda.html', {'cursos':cursos, 'codigo':codigo})
+        return render(request, 'appBlog/adminCursos/resultadoBusqueda.html', {'cursos':cursos, 'codigo':codigo})
     else:
         respuesta = 'No eviaste datos'
 
     return HttpResponse(respuesta)
 
-def listaCursos(request):
+#================================================================================================================================
+#Lista de cursos:
+#================================================================================================================================
+
+#CRUD en vistas SIMPLIFICADO:
+
+class CursoLista(ListView):
+
+    model = Curso
+
+    template_name = 'appBlog/listas/listaDeCursos.html'
+
+class CursoDetalle(DetailView):
+
+    model = Curso
+
+    template_name = 'appBlog/listas/detallesCurso.html'
+
+class CursoCreacion(CreateView):
+
+    model = Curso
+
+    success_url = '/appBlog/curso/list'
+
+    fields = ['nombre', 'codigo', 'duracion']
+
+class CursoUpdate(UpdateView):
+
+    model = Curso
+
+    success_url = '/appBlog/curso/list'
+
+    fields = ['nombre', 'codigo', 'duracion']
+
+class CursoBorrar(DeleteView):
+
+    model = Curso
+
+    success_url = '/appBlog/cursos/list'
+
+#================================================================================================================================
+#Lista de reservas:
+#================================================================================================================================
+
+class ReservaLista(ListView):
+
+    model = Reserva
+
+    template_name = 'appBlog/listas/listaDeReservas.html'
+
+class ReservaDetalle(DetailView):
+
+    model = Reserva
+
+    template_name = 'appBlog/listas/detallesReservas.html'
+
+class ReservaUpdate(UpdateView):
+
+    model = Reserva
+
+    success_url = '/appBlog/reservas/list'
+
+    fields = ['nombre', 'apellido', 'correo', 'evento']
+
+class ReservaDelete(DeleteView):
+
+    model = Reserva
+
+    success_url = '/appBlog/reservas/list'
+
+
+
+
+
+
+
+
+
+
+
+
+# Lista antigua de modelo Curso
+# def listaCursos(request):
     
-    cursos = Curso.objects.all()
-    contexto = {"cursos":cursos}
-    return render(request, "appBlog/blank/listaDeCursos.html",contexto)
+#     cursos = Curso.objects.all()
+#     contexto = {"cursos":cursos}
+#     return render(request, "appBlog/listas/listaDeCursos.html",contexto)
 
-def borrarCurso(request, curso_nombre):
+# def borrarCurso(request, curso_nombre):
     
-    curso = Curso.objects.get(nombre=curso_nombre)
+#     curso = Curso.objects.get(nombre=curso_nombre)
     
-    curso.delete()
+#     curso.delete()
     
-    cursos = Curso.objects.all()
+#     cursos = Curso.objects.all()
 
-    contexto = {'cursos':cursos}
+#     contexto = {'cursos':cursos}
 
-    return render(request, "appBlog/blank/listaDeCursos.html",contexto)
+#     return render(request, "appBlog/listas/listaDeCursos.html",contexto)
 
-def editarCursos(request, curso_nombre):
+# def editarCursos(request, curso_nombre):
 
-    curso = Curso.objects.get(nombre=curso_nombre)
+#     curso = Curso.objects.get(nombre=curso_nombre)
 
-    if request.method == 'POST':
+#     if request.method == 'POST':
         
-        miFormulario = CursoFormulario(request.POST)
+#         editarCForm = CursoFormulario(request.POST)
 
-        if miFormulario.is_valid():
+#         if editarCForm.is_valid():
 
-            informacion = miFormulario.cleaned_data
+#             informacion = editarCForm.cleaned_data
 
-            curso.nombre= informacion['nombre']
-            curso.codigo= informacion['codigo']
-            curso.duracion= informacion['duracion']
+#             curso.nombre= informacion['nombre']
+#             curso.codigo= informacion['codigo']
+#             curso.duracion= informacion['duracion']
 
-            curso.save()
+#             curso.save()
 
-            return render(request, 'appBlog/homePage/index.html')
+#             return render(request, 'appBlog/homePage/index.html')
 
-    else:
+#     else:
 
-        miFormulario = CursoFormulario(initial={'nombre':curso.nombre, 'codigo':curso.codigo, 'duracion':curso.duracion})
+#         editarCForm = CursoFormulario(initial={'nombre':curso.nombre, 'codigo':curso.codigo, 'duracion':curso.duracion})
 
-    return render(request, 'appBlog/blank/editarCurso.html', {'miFormulario':miFormulario, 'curso_nombre':curso_nombre})
+#     return render(request, 'appBlog/listas/editarCurso.html', {'editarCForm':editarCForm, 'curso_nombre':curso_nombre})
 
-def listaReservas(request):
+
+
+#LISTAS VIEJAS DE RESERVAS:
+
+# def listaReservas(request):
     
-    reservas = Reserva.objects.all()
-    contexto = {"reservas":reservas}
-    return render(request, "appBlog/blank/listaDeReservas.html",contexto)
+#     reservas = Reserva.objects.all()
+#     contexto = {"reservas":reservas}
+#     return render(request, "appBlog/listas/listaDeReservas.html",contexto)
 
-def borrarReserva(request, reserva_nombre):
+# def borrarReserva(request, reserva_nombre):
     
-    reserva = Reserva.objects.get(nombre=reserva_nombre)
+#     reserva = Reserva.objects.get(nombre=reserva_nombre)
     
-    reserva.delete()
+#     reserva.delete()
     
-    reservas = Reserva.objects.all()
+#     reservas = Reserva.objects.all()
 
-    contexto = {'reservas':reservas}
+#     contexto = {'reservas':reservas}
 
-    return render(request, "appBlog/blank/listaDeReservas.html",contexto)
+#     return render(request, "appBlog/listas/listaDeReservas.html",contexto)
 
-def editarReservas(request, reserva_nombre):
+# def editarReservas(request, reserva_nombre):
 
-    reserva = Reserva.objects.get(nombre=reserva_nombre)
+#     reserva = Reserva.objects.get(nombre=reserva_nombre)
 
-    if request.method == 'POST':
+#     if request.method == 'POST':
         
-        miFormulario = ReservasFormulario(request.POST)
+#         miFormulario = ReservasFormulario(request.POST)
 
-        if miFormulario.is_valid():
+#         if miFormulario.is_valid():
 
-            informacion = miFormulario.cleaned_data
+#             informacion = miFormulario.cleaned_data
 
-            reserva.nombre= informacion['nombre']
-            reserva.apellido= informacion['apellido']
-            reserva.duracion= informacion['correo']
-            reserva.duracion= informacion['evento']
+#             reserva.nombre= informacion['nombre']
+#             reserva.apellido= informacion['apellido']
+#             reserva.duracion= informacion['correo']
+#             reserva.duracion= informacion['evento']
 
-            reserva.save()
+#             reserva.save()
 
-            return render(request, 'appBlog/homePage/index.html')
+#             return render(request, 'appBlog/homePage/index.html')
 
-    else:
+#     else:
 
-        miFormulario = ReservasFormulario(initial={'nombre':reserva.nombre, 'apellido':reserva.apellido, 'correo':reserva.correo, 'evento':reserva.evento})
+#         miFormulario = ReservasFormulario(initial={'nombre':reserva.nombre, 'apellido':reserva.apellido, 'correo':reserva.correo, 'evento':reserva.evento})
 
-    return render(request, 'appBlog/blank/editarReserva.html', {'miFormulario':miFormulario, 'reserva_nombre':reserva_nombre})
-
-
-
-    
+#     return render(request, 'appBlog/listas/editarReserva.html', {'miFormulario':miFormulario, 'reserva_nombre':reserva_nombre})

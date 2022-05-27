@@ -23,10 +23,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'aboutMe' %}">About Me</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'aboutDeveloper' %}">About developer</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'aboutDeveloper' %}">Sobre el desarrollador</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'serEstudiante' %}">Inscribirme</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#signup">Contacto</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'apply' %}">Reserva</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'projects' %}">Proyectos</a></li>
                     </ul>
                 </div>
             </div>
@@ -34,7 +34,7 @@
         <!-- Header - set the background image for the header in the line below-->
         <header class="py-5 bg-image-full" style="background-image: url('https://images2.alphacoders.com/204/thumb-1920-204410.jpg');" >
             <div class="text-center my-5">
-                <img class="img-fluid rounded-circle mb-4" src="https://dummyimage.com/150x150/6c757d/dee2e6.jpg" alt="..." />
+                <img class="img-fluid rounded-circle mb-4" src="{% static 'appBlog_about/assets/Photos/jueves150.jpg' %}" alt="..." />
                 <h1 class="text-white fs-3 fw-bolder">Jeremias Randazzo</h1>
                 <p class="text-white-50 mb-0">Fotografo</p>
             </div>

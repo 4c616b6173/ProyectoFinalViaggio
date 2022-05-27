@@ -11,11 +11,13 @@ urlpatterns = [
     path('resultadoBusqueda', views.buscar, name='resultadoBusqueda'),
     path('projects/', views.projects, name='projects'),
     path('apply/', views.apply, name='apply'),
-    path('listaCursos/', views.listaCursos, name='listaCursos'),
-    path('listaReservas/', views.listaReservas, name='listaReservas'),
-    path('borrarCurso/<curso_nombre>', views.borrarCurso, name='borrarCurso'),
-    path('editarCurso/<curso_nombre>', views.editarCursos, name='editarCurso'),
-    path('borrarReserva/<reserva_nombre>', views.borrarReserva, name='borrarReserva'),
-    path('editarReserva/<reserva_nombre>', views.editarReservas, name='editarReserva'),
+    #URL LISTA DE CURSOS:
+    path('cursos/list', views.CursoLista.as_view(), name='listaCursos'),
+    path(r'^(?P<pk>\d+)$', views.CursoDetalle.as_view(), name='Detail'),
+    path(r'^nuevo$', views.CursoCreacion.as_view(), name='New'),
+    path(r'^editar/(?P<pk>\d+)$', views.CursoUpdate.as_view(),name='Edit'),
+    path(r'^borrar/(?P<pk>\d+)$', views.CursoBorrar.as_view(), name='Delete'),
+    #URL LISTA DE RESERVAS:
+    path('reservas/list', views.ReservaLista.as_view(), name='listaReservas'),
     
 ]
