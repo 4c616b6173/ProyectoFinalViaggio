@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% load static %}
+  	<title>JR | Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="{% static 'appBlog_login/css/style.css' %}">
+
+	</head>
+	<body class="img js-fullheight">
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<h2 class="heading-section">Login</h2>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-6 col-lg-4">
+					<div class="login-wrap p-0">
+		      	<h3 class="mb-4 text-center">Have an account?</h3>
+				<div class="form-group">
+					<center>
+						<form action="" method="POST">   {% csrf_token %}
+				
+							{{form.as_p}}
+						
+							<button type="submit" class="form-control btn btn-primary submit px-3">Iniciar Sesión</button>
+						
+						</form>
+					</center>
+				</div>
+	          <center><a class="w-100 text-center" href="https//www.facebook.com">&mdash; Register &mdash;</a></center>
+		      </div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="{% static 'appBlog_login/js/jquery.min.js' %}"></script>
+    <script src="{% static 'appBlog_login/js/popper.js' %}"></script>
+    <script src="{% static 'appBlog_login/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'appBlog_login/js/main.js' %}"></script>
+
+	</body>
+</html>
+

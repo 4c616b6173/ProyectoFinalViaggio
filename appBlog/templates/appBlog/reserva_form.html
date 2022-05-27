@@ -1,0 +1,22 @@
+{% extends 'appBlog/blank/blankPadre.html' %}
+
+{% load static %}
+
+{% block contenidoblock %}
+    <h2 style="color: white; font-size: x-large; font-style: oblique; font-family: 'Franklin Gothic Medium';">
+        Edita la reserva:
+    </h2>
+
+    <form method="POST">{% csrf_token %}
+
+        <table style="text-align: center;">
+
+        {{ form.as_p}}
+
+        </table>
+
+        <input type="submit" value="Enviar" style="color:blue">
+
+    </form>
+
+{% endblock %}

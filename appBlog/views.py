@@ -7,8 +7,57 @@ from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, logout, authenticate
 
 # Create your views here.
+
+def loginRequest(request):
+
+    if request.method == 'POST':
+
+        form = AuthenticationForm(request, data = request.POST)
+
+        if form.is_valid():
+
+            user = form.cleaned_data.get('username')
+            passw = form.cleaned_data.get('password')
+
+            user1 = authenticate(username=user, password=passw)
+
+            if user:
+
+                login(request, user1)
+
+                return render(request, 'appBlog/homePage/index.html', {'mensaje':f'Bienvenido{user1}.'})
+
+        else:
+            return render(request, 'appBlog/homePage/index.html', {'mensaje':f'Error. Datos incorrectos.'})
+
+    else:
+        form = AuthenticationForm
+
+    return render(request, 'appBlog/homePage/login.html', {'form':form})
+
+
+# def register(request):
+
+#     if register.method == 'POST':
+
+#         form = UserRegisterForm(request.POST)
+
+#         if form.is_valid():
+
+#             username = form.cleaned_data['username']
+#             form.save()
+#             return render(request, 'appBlog/homePage/login.html')
+    
+#     else:
+#         form = UserRegisterForm
+#     return render(request, 'appBlog/homePage/register.html', {'form':form})
+
+
+
 def home(request):
     return render(request, 'appBlog/homePage/index.html')
 
@@ -160,7 +209,7 @@ class ReservaDetalle(DetailView):
 
     model = Reserva
 
-    template_name = 'appBlog/listas/detallesReservas.html'
+    template_name = 'appBlog/listas/detallesReserva.html'
 
 class ReservaUpdate(UpdateView):
 
@@ -176,7 +225,35 @@ class ReservaDelete(DeleteView):
 
     success_url = '/appBlog/reservas/list'
 
+#================================================================================================================================
+#Lista de estudiantes:
+#================================================================================================================================
 
+class EstudianteLista(ListView):
+
+    model = Estudiante
+
+    template_name = 'appBlog/listas/listaDeEstudiante.html'
+
+class EstudianteDetalle(DetailView):
+
+    model = Estudiante
+
+    template_name = 'appBlog/listas/detallesEstudiante.html'
+
+class EstudianteUpdate(UpdateView):
+
+    model = Estudiante
+
+    success_url = '/appBlog/estudiante/list'
+
+    fields = ['nombre', 'apellido', 'correo', 'edad']
+
+class EstudianteDelete(DeleteView):
+
+    model = Estudiante
+
+    success_url = '/appBlog/estudiante/list'
 
 
 

@@ -1,0 +1,18 @@
+{% extends 'appBlog/blank/blankPadre.html' %}
+
+{% load static %}
+
+{% block contenidoblock %}
+    <h2 style="color: white; font-size: x-large; font-style: oblique; font-family: 'Franklin Gothic Medium';">
+        Estas seguro de querer borrar esta reserva?<br>En caso de no estar seguro por favor vuelve a la pagina anterior.
+    </h2>
+    <br>
+    <form method="post">{% csrf_token %}
+
+        <input type="submit" value="Deseo borrar la reserva {{ reserva.nombre}}" style="color:rgb(255, 0, 0)">
+        <br><br>
+        <a href="{% url 'listaReservas' %}" style="color:blue">Volver</a>
+
+    </form>
+
+{% endblock %}

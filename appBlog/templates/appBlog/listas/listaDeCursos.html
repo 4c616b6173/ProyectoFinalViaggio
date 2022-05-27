@@ -48,13 +48,12 @@
                         {% for curso in object_list %}
                             <h2>Nombre: {{curso.nombre}}</h2>
                             <p>
-                                <a style="color:orangered" class="btn btn-secundary" href="{% url 'Detail' curso.id %}">Ver</a>
-                                <a style="color:orangered" class="btn btn-secundary" href="{% url 'Edit' curso.id %}">Editar</a>
-                                <a style="color:orangered" class="btn btn-secundary" href="{% url 'Delete' curso.id %}">BORRAR</a>
-                                <!-- <a href="{% url 'Delete' curso.id %}">Borrar</a> -->
+                                <a style="color:orangered" class="btn btn-secundary" href="{% url 'DetailCurso' curso.id %}">Ver</a>
+                                <a style="color:orangered" class="btn btn-secundary" href="{% url 'EditCurso' curso.id %}">Editar</a>
+                                <a style="color:orangered" class="btn btn-secundary" href="{% url 'DeleteCurso' curso.id %}">BORRAR</a>
                             </p>
                         {% endfor %}
-                        <a class="btn btn-primary" href="{% url 'New' %}">CREAR NUEVO CURSO</a>
+                        <a class="btn btn-primary" href="{% url 'NewCurso' %}">CREAR NUEVO CURSO</a>
                     </center>            
                 </ul>
             </center>
