@@ -18,26 +18,16 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">Login required</h2>
+					<h2 class="heading-section">Login</h2>
 				</div>
 			</div>
 			<div class="row justify-content-center">
 				<div class="col-md-6 col-lg-4">
 					<div class="login-wrap p-0">
-		      	<h3 class="mb-4 text-center">In order to access this seccion you have to be a superuser.</h3>
-				<div class="form-group">
-					<center>
-						<form action="" method="POST">   {% csrf_token %}
-				
-							{{form.as_p}}
-						
-							<button style="background-color: rgb(255, 102, 0);" type="submit" class="form-control btn btn-primary submit px-3">Iniciar Sesión</button>
-						
-						</form>
-					</center>
-				</div>
-	          <!-- <center><a class="w-100 text-center" href="https//www.facebook.com">&mdash; Register &mdash;</a></center> -->
-		      </div>
+		      	<h3 class="mb-4 text-center">You have logged out!</h3>
+		      <center><a style="background-color: rgb(255, 102, 0);" href="{% url 'home' %}" class="form-control btn btn-primary submit px-3">Home</a></center>
+              <!-- <button style="background-color: rgb(255, 102, 0);" href="{% url 'home' %}" class="form-control btn btn-primary submit px-3">Home</button> -->
+              </div>
 				</div>
 			</div>
 		</div>
