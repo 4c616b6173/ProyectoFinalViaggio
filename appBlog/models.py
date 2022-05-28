@@ -1,16 +1,16 @@
 from django.db import models
 
 # Create your models here.
-class Reserva(models.Model):
-    nombre = models.CharField(max_length=40)
-    apellido = models.CharField(max_length=40)
-    correo = models.EmailField()
-    evento = models.CharField(max_length=100)
+class Book(models.Model):
+    name = models.CharField(max_length=40)
+    lastname = models.CharField(max_length=40)
+    mail = models.EmailField()
+    event = models.CharField(max_length=100)
     def __str__(self):
-        return f'Nombre: {self.nombre} | Apellido: {self.apellido} | E-mail: {self.correo} | Evento: {self.evento}.'
+        return f'Name: {self.name} | Lastname: {self.lastname} | E-mail: {self.mail} | Event: {self.event}.'
     class Meta:
-        verbose_name = 'Reserva'
-        verbose_name_plural = 'Reservas'
+        verbose_name = 'Book'
+        verbose_name_plural = 'Books'
 
 class Estudiante(models.Model):
     nombre = models.CharField(max_length=40)

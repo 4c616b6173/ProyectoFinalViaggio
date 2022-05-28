@@ -1,14 +1,16 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from appBlog.forms import CursoFormulario, EstudianteFormulario, ReservasFormulario
-from appBlog.models import Curso, Estudiante, Reserva
+from appBlog.forms import CursoFormulario, EstudianteFormulario, UserRegisterForm, BookForm
+from appBlog.models import Curso, Estudiante, Book
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
@@ -39,22 +41,23 @@ def loginRequest(request):
 
     return render(request, 'appBlog/homePage/login.html', {'form':form})
 
+@login_required
 
-# def register(request):
+def register(request):
 
-#     if register.method == 'POST':
+    if request.method == 'POST':
 
-#         form = UserRegisterForm(request.POST)
+        form = UserRegisterForm(request.POST)
 
-#         if form.is_valid():
+        if form.is_valid():
 
-#             username = form.cleaned_data['username']
-#             form.save()
-#             return render(request, 'appBlog/homePage/login.html')
+            user = form.cleaned_data['username']
+            form.save()
+            return render(request, 'appBlog/homePage/index.html')
     
-#     else:
-#         form = UserRegisterForm
-#     return render(request, 'appBlog/homePage/register.html', {'form':form})
+    else:
+        form = UserRegisterForm
+    return render(request, 'appBlog/homePage/register.html', {'form':form})
 
 
 
@@ -64,24 +67,24 @@ def home(request):
 def apply(request):
     if request.method == 'POST':
 
-        reservasF = ReservasFormulario(request.POST)
+        bookF = BookForm(request.POST)
 
-        print(reservasF)
+        print(bookF)
 
-        if reservasF.is_valid():
+        if bookF.is_valid():
 
-            informacion = reservasF.cleaned_data
+            information = bookF.cleaned_data
 
-            reservas = Reserva(nombre=informacion['nombre'], apellido=informacion['apellido'], correo=informacion['correo'], evento=informacion['evento'])
+            book = Book(name=information['name'], lastname=information['lastname'], mail=information['mail'], event=information['event'])
 
-            reservas.save()
+            book.save()
 
             return render(request, "appBlog/blank/vuelveAlInicio.html")
         
     else:
 
-        reservasF = ReservasFormulario()
-    return render(request, 'appBlog/apply/apply.html', {'reservasF':reservasF})
+        bookF = BookForm()
+    return render(request, 'appBlog/apply/apply.html', {'bookF':bookF})
 
 def projects(request):
     return render(request, 'appBlog/projects/projects.html')
@@ -113,6 +116,8 @@ def serEstudiante(request):
 
         estudiantesF = EstudianteFormulario()
     return render(request, 'appBlog/serEstudiante/serEstudiante.html', {'estudiantesF':estudiantesF})
+
+@login_required
 
 def adminCursos(request):
     if request.method == 'POST':
@@ -161,19 +166,19 @@ def buscar(request):
 
 #CRUD en vistas SIMPLIFICADO:
 
-class CursoLista(ListView):
+class CursoLista(LoginRequiredMixin, ListView):
 
     model = Curso
 
     template_name = 'appBlog/listas/listaDeCursos.html'
 
-class CursoDetalle(DetailView):
+class CursoDetalle(LoginRequiredMixin, DetailView):
 
     model = Curso
 
     template_name = 'appBlog/listas/detallesCurso.html'
 
-class CursoCreacion(CreateView):
+class CursoCreacion(LoginRequiredMixin, CreateView):
 
     model = Curso
 
@@ -181,7 +186,7 @@ class CursoCreacion(CreateView):
 
     fields = ['nombre', 'codigo', 'duracion']
 
-class CursoUpdate(UpdateView):
+class CursoUpdate(LoginRequiredMixin, UpdateView):
 
     model = Curso
 
@@ -189,7 +194,7 @@ class CursoUpdate(UpdateView):
 
     fields = ['nombre', 'codigo', 'duracion']
 
-class CursoBorrar(DeleteView):
+class CursoBorrar(LoginRequiredMixin, DeleteView):
 
     model = Curso
 
@@ -199,29 +204,29 @@ class CursoBorrar(DeleteView):
 #Lista de reservas:
 #================================================================================================================================
 
-class ReservaLista(ListView):
+class BookList(LoginRequiredMixin, ListView):
 
-    model = Reserva
+    model = Book
 
     template_name = 'appBlog/listas/listaDeReservas.html'
 
-class ReservaDetalle(DetailView):
+class BookDetail(LoginRequiredMixin, DetailView):
 
-    model = Reserva
+    model = Book
 
     template_name = 'appBlog/listas/detallesReserva.html'
 
-class ReservaUpdate(UpdateView):
+class BookUpdate(LoginRequiredMixin, UpdateView):
 
-    model = Reserva
+    model = Book
 
     success_url = '/appBlog/reservas/list'
 
     fields = ['nombre', 'apellido', 'correo', 'evento']
 
-class ReservaDelete(DeleteView):
+class BookDelete(LoginRequiredMixin, DeleteView):
 
-    model = Reserva
+    model = Book
 
     success_url = '/appBlog/reservas/list'
 
@@ -229,19 +234,19 @@ class ReservaDelete(DeleteView):
 #Lista de estudiantes:
 #================================================================================================================================
 
-class EstudianteLista(ListView):
+class EstudianteLista(LoginRequiredMixin, ListView):
 
     model = Estudiante
 
     template_name = 'appBlog/listas/listaDeEstudiante.html'
 
-class EstudianteDetalle(DetailView):
+class EstudianteDetalle(LoginRequiredMixin, DetailView):
 
     model = Estudiante
 
     template_name = 'appBlog/listas/detallesEstudiante.html'
 
-class EstudianteUpdate(UpdateView):
+class EstudianteUpdate(LoginRequiredMixin, UpdateView):
 
     model = Estudiante
 
@@ -249,7 +254,7 @@ class EstudianteUpdate(UpdateView):
 
     fields = ['nombre', 'apellido', 'correo', 'edad']
 
-class EstudianteDelete(DeleteView):
+class EstudianteDelete(LoginRequiredMixin, DeleteView):
 
     model = Estudiante
 

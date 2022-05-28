@@ -41,10 +41,10 @@
                 <div style="color: white" class="d-flex justify-content-center">
                     <center>
                         <br><br><br><br><br>
-                        <p>Reserva a nombre de: <i>{{reserva.nombre}} {{reserva.apellido}}</i></p>
-                        <p>Correo: <i>{{reserva.correo}}</i></p>
-                        <p>Evento: <i>{{reserva.evento}}</i></p>
-                        <a href="{% url 'listaReservas' %}"></a>
+                        <p>Name: <i>{{book.name}} {{book.lastname}}</i></p>
+                        <p>Mail: <i>{{book.mail}}</i></p>
+                        <p>Event: <i>{{book.event}}</i></p>
+                        <a href="{% url 'bookList' %}"></a>
                     </center>
                 </div>
             </div>

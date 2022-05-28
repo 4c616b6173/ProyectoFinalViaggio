@@ -44,12 +44,12 @@
                 <h1>Lista de reservas:</h1>
                 <ul>
                     <center>
-                        {% for reserva in object_list %}
-                            <h2>Nombre: {{reserva.nombre}}</h2>
+                        {% for book in object_list %}
+                            <h2>Nombre: {{book.name}}</h2>
                             <p>
-                                <a style="color:orangered" class="btn btn-secundary" href="{% url 'DetailReserva' reserva.id %}">Ver</a>
-                                <a style="color:orangered" class="btn btn-secundary" href="{% url 'EditReserva' reserva.id %}">Editar</a>
-                                <a style="color:orangered" class="btn btn-secundary" href="{% url 'DeleteReserva' reserva.id %}">BORRAR</a>
+                                <a style="color:orangered" class="btn btn-secundary" href="{% url 'BookDetail' book.id %}">Ver</a>
+                                <a style="color:orangered" class="btn btn-secundary" href="{% url 'BookEdit' book.id %}">Editar</a>
+                                <a style="color:orangered" class="btn btn-secundary" href="{% url 'BookDelete' book.id %}">BORRAR</a>
                             </p>
                         {% endfor %}
                     </center>            
