@@ -1,8 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from appBlog.forms import CursoFormulario, EstudianteFormulario, UserRegisterForm, BookForm
-from appBlog.models import Curso, Estudiante, Book
+from appBlog.forms import CourseForm, StudentForm, UserRegisterForm, BookForm
+from appBlog.models import Course, Student, Book
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
@@ -95,68 +95,68 @@ def aboutDeveloper(request):
 def aboutMe(request):
     return render(request, 'appBlog/about/aboutMe.html')
 
-def serEstudiante(request):
+def beStudent(request):
     if request.method == 'POST':
 
-        estudiantesF = EstudianteFormulario(request.POST)
+        studentsF = StudentForm(request.POST)
 
-        print(estudiantesF)
+        print(studentsF)
 
-        if estudiantesF.is_valid():
+        if studentsF.is_valid():
 
-            informacion = estudiantesF.cleaned_data
+            information = studentsF.cleaned_data
 
-            estudiantes = Estudiante(nombre=informacion['nombre'], apellido=informacion['apellido'], correo=informacion['correo'], edad=informacion['edad'])
+            students = Student(name=information['name'], lastname=information['lastname'], mail=information['mail'], age=information['age'])
 
-            estudiantes.save()
+            students.save()
 
             return render(request, "appBlog/blank/vuelveAlInicio.html")
         
     else:
 
-        estudiantesF = EstudianteFormulario()
-    return render(request, 'appBlog/serEstudiante/serEstudiante.html', {'estudiantesF':estudiantesF})
+        studentsF = StudentForm()
+    return render(request, 'appBlog/serEstudiante/serEstudiante.html', {'studentsF':studentsF})
 
 @login_required
 
-def adminCursos(request):
+def courseAdmin(request):
     if request.method == 'POST':
 
-        cursoF = CursoFormulario(request.POST)
+        courseF = CourseForm(request.POST)
 
-        print(cursoF)
+        print(courseF)
 
-        if cursoF.is_valid():
+        if courseF.is_valid():
 
-            informacion = cursoF.cleaned_data
+            information = courseF.cleaned_data
 
-            curso = Curso(nombre=informacion['nombre'], codigo=informacion['codigo'], duracion=informacion['duracion'])
+            course = Course(name=information['name'], code=information['code'], duration=information['duration'])
 
-            curso.save()
+            course.save()
 
             return render(request, "appBlog/blank/vuelveAlInicio.html")
         
     else:
 
-        cursoF = CursoFormulario()
-    return render(request, 'appBlog/adminCursos/adminCursos.html', {'cursoF':cursoF})
+        courseF = CourseForm()
+    return render(request, 'appBlog/adminCursos/adminCursos.html', {'courseF':courseF})
 
 def busquedaCodigo(request):
     
     return render(request, 'appBlog/adminCursos/adminCursos.html')
 
 
-def buscar(request):
+def search(request):
 
     if request.GET['codigo']:
         
-        codigo = request.GET['codigo']
+        code = request.GET['code']
 
-        cursos = Curso.objects.filter(codigo__icontains=codigo)
+        courses = Course.objects.filter(code__icontains=code)
         
-        return render(request, 'appBlog/adminCursos/resultadoBusqueda.html', {'cursos':cursos, 'codigo':codigo})
+        return render(request, 'appBlog/adminCursos/resultadoBusqueda.html', {'courses':courses, 'code':code})
     else:
-        respuesta = 'No eviaste datos'
+        respuesta = 'Wrong data'
 
     return HttpResponse(respuesta)
 
@@ -166,39 +166,39 @@ def buscar(request):
 
 #CRUD en vistas SIMPLIFICADO:
 
-class CursoLista(LoginRequiredMixin, ListView):
+class CourseList(LoginRequiredMixin, ListView):
 
-    model = Curso
+    model = Course
 
     template_name = 'appBlog/listas/listaDeCursos.html'
 
-class CursoDetalle(LoginRequiredMixin, DetailView):
+class CourseDetail(LoginRequiredMixin, DetailView):
 
-    model = Curso
+    model = Course
 
     template_name = 'appBlog/listas/detallesCurso.html'
 
-class CursoCreacion(LoginRequiredMixin, CreateView):
+class CourseCreation(LoginRequiredMixin, CreateView):
 
-    model = Curso
+    model = Course
 
-    success_url = '/appBlog/curso/list'
+    success_url = '/appBlog/course/list'
 
-    fields = ['nombre', 'codigo', 'duracion']
+    fields = ['name', 'code', 'duration']
 
-class CursoUpdate(LoginRequiredMixin, UpdateView):
+class CourseUpdate(LoginRequiredMixin, UpdateView):
 
-    model = Curso
+    model = Course
 
-    success_url = '/appBlog/curso/list'
+    success_url = '/appBlog/course/list'
 
-    fields = ['nombre', 'codigo', 'duracion']
+    fields = ['name', 'code', 'duration']
 
-class CursoBorrar(LoginRequiredMixin, DeleteView):
+class CourseDelete(LoginRequiredMixin, DeleteView):
 
-    model = Curso
+    model = Course
 
-    success_url = '/appBlog/cursos/list'
+    success_url = '/appBlog/course/list'
 
 #================================================================================================================================
 #Lista de reservas:
@@ -220,7 +220,7 @@ class BookUpdate(LoginRequiredMixin, UpdateView):
 
     model = Book
 
-    success_url = '/appBlog/reservas/list'
+    success_url = '/appBlog/book/list'
 
     fields = ['nombre', 'apellido', 'correo', 'evento']
 
@@ -228,37 +228,37 @@ class BookDelete(LoginRequiredMixin, DeleteView):
 
     model = Book
 
-    success_url = '/appBlog/reservas/list'
+    success_url = '/appBlog/book/list'
 
 #================================================================================================================================
 #Lista de estudiantes:
 #================================================================================================================================
 
-class EstudianteLista(LoginRequiredMixin, ListView):
+class StudentList(LoginRequiredMixin, ListView):
 
-    model = Estudiante
+    model = Student
 
     template_name = 'appBlog/listas/listaDeEstudiante.html'
 
-class EstudianteDetalle(LoginRequiredMixin, DetailView):
+class StudentDetail(LoginRequiredMixin, DetailView):
 
-    model = Estudiante
+    model = Student
 
     template_name = 'appBlog/listas/detallesEstudiante.html'
 
-class EstudianteUpdate(LoginRequiredMixin, UpdateView):
+class StudentUpdate(LoginRequiredMixin, UpdateView):
 
-    model = Estudiante
+    model = Student
 
-    success_url = '/appBlog/estudiante/list'
+    success_url = '/appBlog/student/list'
 
-    fields = ['nombre', 'apellido', 'correo', 'edad']
+    fields = ['name', 'lastname', 'mail', 'age']
 
-class EstudianteDelete(LoginRequiredMixin, DeleteView):
+class StudentDelete(LoginRequiredMixin, DeleteView):
 
-    model = Estudiante
+    model = Student
 
-    success_url = '/appBlog/estudiante/list'
+    success_url = '/appBlog/student/list'
 
 
 

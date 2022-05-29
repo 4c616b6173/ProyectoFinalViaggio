@@ -1,0 +1,18 @@
+{% extends 'appBlog/blank/blankPadre.html' %}
+
+{% load static %}
+
+{% block contenidoblock %}
+    <h2 style="color: white; font-size: x-large; font-style: oblique; font-family: 'Franklin Gothic Medium';">
+        Are you sure you want to delete this student?<br>If you are not sure, please come back to the previous page.
+    </h2>
+    <br>
+    <form method="post">{% csrf_token %}
+
+        <input style="background-color:orangered" type="submit" value="Delete {{ student.name }} {{ student.name }}" style="color:rgb(255, 0, 0)">
+        <br><br>
+        <a href="{% url 'studentList' %}" style="color:blue">Go back</a>
+
+    </form>
+
+{% endblock %}

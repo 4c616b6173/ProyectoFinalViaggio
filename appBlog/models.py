@@ -12,25 +12,25 @@ class Book(models.Model):
         verbose_name = 'Book'
         verbose_name_plural = 'Books'
 
-class Estudiante(models.Model):
-    nombre = models.CharField(max_length=40)
-    apellido = models.CharField(max_length=40)
-    correo = models.EmailField()
-    edad = models.IntegerField(default=0)
+class Student(models.Model):
+    name = models.CharField(max_length=40)
+    lastname = models.CharField(max_length=40)
+    mail = models.EmailField()
+    age = models.IntegerField(default=0)
     def __str__(self):
-        return f'Nombre: {self.nombre} | Apellido: {self.apellido} | E-mail: {self.correo} | Edad: {self.edad}.'
+        return f'Name: {self.name} | Lastname: {self.lastname} | E-mail: {self.mail} | Edad: {self.age}.'
     class Meta:
-        verbose_name = 'Estudiantes'
-        verbose_name_plural = 'Estudiantes'
+        verbose_name = 'Student'
+        verbose_name_plural = 'Students'
 
-class Curso(models.Model):
-    nombre = models.CharField(max_length=40)
-    codigo = models.IntegerField(default=0)
-    duracion = models.IntegerField(default=3)
+class Course(models.Model):
+    name = models.CharField(max_length=40)
+    code = models.IntegerField(default=0)
+    duration = models.IntegerField(default=3)
     def __str__(self):
-        return f'Nombre: {self.nombre} | Codigo: {self.codigo} | Duracion: {self.duracion} semanas.'
+        return f'Name: {self.name} | Code: {self.code} | Duration: {self.duration} weeks.'
     class Meta:
-        verbose_name = 'Curso'
-        verbose_name_plural = 'Cursos'
+        verbose_name = 'Course'
+        verbose_name_plural = 'Courses'
 
 

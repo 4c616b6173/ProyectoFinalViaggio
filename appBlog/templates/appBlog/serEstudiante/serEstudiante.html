@@ -4,9 +4,9 @@
 
 {% block estudiantes %}
 
-    {% if estudiantesF.errors %}
+    {% if studentsF.errors %}
 
-    <p style="color: red;">Los datos ingresados son incorrectos.</p>
+    <p style="color: red;">Incorrect data.</p>
 
     {% endif %}
 
@@ -14,11 +14,11 @@
 
         <table style="text-align: center;">
 
-        {{ estudiantesF.as_table }}
+        {{ studentsF.as_table }}
 
         </table>
 
-    <input type="submit" value="Enviar">
+    <input type="submit" value="Submit">
 
     </form>
 

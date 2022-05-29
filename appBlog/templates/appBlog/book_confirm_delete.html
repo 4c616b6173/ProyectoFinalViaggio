@@ -4,14 +4,14 @@
 
 {% block contenidoblock %}
     <h2 style="color: white; font-size: x-large; font-style: oblique; font-family: 'Franklin Gothic Medium';">
-        Estas seguro de querer borrar este curso?<br>En caso de no estar seguro por favor vuelve a la pagina anterior.
+        Are you sure you want to delete this reservation?<br>If you are not sure, please come back to the previous page.
     </h2>
     <br>
     <form method="post">{% csrf_token %}
 
-        <input type="submit" value="Deseo borrar el curso {{ curso.nombre}}" style="color:rgb(255, 0, 0)">
+        <input type="submit" value="Deseo borrar la reserva {{ reserva.nombre}}" style="color:rgb(255, 0, 0)">
         <br><br>
-        <a href="{% url 'listaCursos' %}" style="color:blue">Volver</a>
+        <a href="{% url 'bookList' %}" style="color:blue">Go back</a>
 
     </form>
 

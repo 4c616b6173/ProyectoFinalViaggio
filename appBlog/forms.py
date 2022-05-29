@@ -8,16 +8,16 @@ class BookForm(forms.Form):
     mail = forms.EmailField()
     event = forms.CharField()
 
-class EstudianteFormulario(forms.Form):
-    nombre = forms.CharField()
-    apellido = forms.CharField()
-    correo = forms.EmailField()
-    edad = forms.IntegerField()
+class StudentForm(forms.Form):
+    name = forms.CharField()
+    lastname = forms.CharField()
+    mail = forms.EmailField()
+    age = forms.IntegerField()
 
-class CursoFormulario(forms.Form):
-    nombre = forms.CharField()
-    codigo = forms.IntegerField()
-    duracion = forms.IntegerField()
+class CourseForm(forms.Form):
+    name = forms.CharField()
+    code = forms.IntegerField()
+    duration = forms.IntegerField()
 
 class UserRegisterForm(UserCreationForm):
 

@@ -7,23 +7,23 @@
 
     {% if cursoF.errors %}
 
-    <p style="color: red;">Los datos ingresados son incorrectos.</p>
+    <p style="color: red;">Wrong data.</p>
 
     {% endif %}
 
     <h2 style="color: white; font-size: x-large; font-style: oblique; font-family: 'Franklin Gothic Medium';">
-        Agrega un curso:
+        Add a course:
     </h2>
 
     <form action="" method="POST">{% csrf_token %}
 
         <table style="text-align: center;">
 
-        {{ cursoF.as_table }}
+        {{ courseF.as_table }}
 
         </table>
 
-    <input type="submit" value="Enviar">
+    <input type="submit" value="Submit">
 
     </form>
 
@@ -32,17 +32,17 @@
 {% block buscarCodigo %}
 
 <h2 style="color: white; font-size: x-large; font-style: oblique; font-family: 'Franklin Gothic Medium';">
-    Buscar curso por codigo:
+    Search course by code:
 </h2>
-<form action="buscar/" method="GET">
-    <input type="number" name="codigo" id="codigo">
+<form action="search/" method="GET">
+    <input type="number" name="code" id="code">
 
-    <input type="submit" value="Buscar">
+    <input type="submit" value="Search">
 </form>
 
 <br>
 
-<a class="btn btn-primary" href="{% url 'listaCursos' %}">Lista de cursos</a>
+<a class="btn btn-primary" href="{% url 'courseList' %}">Courses list</a>
 
 
 {% endblock %}
