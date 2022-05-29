@@ -79,7 +79,7 @@ def apply(request):
 
             book.save()
 
-            return render(request, "appBlog/blank/vuelveAlInicio.html")
+            return render(request, "appBlog/blank/backToHome.html")
         
     else:
 
@@ -110,12 +110,12 @@ def beStudent(request):
 
             students.save()
 
-            return render(request, "appBlog/blank/vuelveAlInicio.html")
+            return render(request, "appBlog/blank/backToHome.html")
         
     else:
 
         studentsF = StudentForm()
-    return render(request, 'appBlog/serEstudiante/serEstudiante.html', {'studentsF':studentsF})
+    return render(request, 'appBlog/beStudent/beStudent.html', {'studentsF':studentsF})
 
 @login_required
 
@@ -134,27 +134,27 @@ def courseAdmin(request):
 
             course.save()
 
-            return render(request, "appBlog/blank/vuelveAlInicio.html")
+            return render(request, "appBlog/blank/backToHome.html")
         
     else:
 
         courseF = CourseForm()
-    return render(request, 'appBlog/adminCursos/adminCursos.html', {'courseF':courseF})
+    return render(request, 'appBlog/coursesAdmin/coursesAdmin.html', {'courseF':courseF})
 
 def busquedaCodigo(request):
     
-    return render(request, 'appBlog/adminCursos/adminCursos.html')
+    return render(request, 'appBlog/coursesAdmin/coursesAdmin.html')
 
 
 def search(request):
 
-    if request.GET['codigo']:
+    if request.GET['code']:
         
         code = request.GET['code']
 
         courses = Course.objects.filter(code__icontains=code)
         
-        return render(request, 'appBlog/adminCursos/resultadoBusqueda.html', {'courses':courses, 'code':code})
+        return render(request, 'appBlog/coursesAdmin/searchResults.html', {'courses':courses, 'code':code})
     else:
         respuesta = 'Wrong data'
 
@@ -170,13 +170,13 @@ class CourseList(LoginRequiredMixin, ListView):
 
     model = Course
 
-    template_name = 'appBlog/listas/listaDeCursos.html'
+    template_name = 'appBlog/lists/coursesList.html'
 
 class CourseDetail(LoginRequiredMixin, DetailView):
 
     model = Course
 
-    template_name = 'appBlog/listas/detallesCurso.html'
+    template_name = 'appBlog/lists/courseDetails.html'
 
 class CourseCreation(LoginRequiredMixin, CreateView):
 
@@ -208,13 +208,13 @@ class BookList(LoginRequiredMixin, ListView):
 
     model = Book
 
-    template_name = 'appBlog/listas/listaDeReservas.html'
+    template_name = 'appBlog/lists/reservationsList.html'
 
 class BookDetail(LoginRequiredMixin, DetailView):
 
     model = Book
 
-    template_name = 'appBlog/listas/detallesReserva.html'
+    template_name = 'appBlog/lists/reservationDetails.html'
 
 class BookUpdate(LoginRequiredMixin, UpdateView):
 
@@ -238,13 +238,13 @@ class StudentList(LoginRequiredMixin, ListView):
 
     model = Student
 
-    template_name = 'appBlog/listas/listaDeEstudiante.html'
+    template_name = 'appBlog/lists/studentsList.html'
 
 class StudentDetail(LoginRequiredMixin, DetailView):
 
     model = Student
 
-    template_name = 'appBlog/listas/detallesEstudiante.html'
+    template_name = 'appBlog/lists/studentDetails.html'
 
 class StudentUpdate(LoginRequiredMixin, UpdateView):
 

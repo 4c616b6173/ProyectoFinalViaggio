@@ -5,13 +5,13 @@
 {% block contenidoblock %}
 
     <p>
-        Buscando: {{codigo}}
+        Searching: {{code}}
     </p>
     <ul>
-    {% for curso in cursos %}
+    {% for course in courses %}
         <li>
-            {{curso.nombre}}
-            {{curso.codigo}}
+            {{course.name}}
+            {{course.code}}
         </li>
     {% endfor %}
     </ul>
