@@ -1,9 +1,9 @@
 # ProyectoFinalViaggio
 
-<!-- Se debe tener en cuenta que el proyecto esta en su etapa BETA 1.4 a la hora de entregado como primer instancia del final -->
 
-En este proyecto de WebApp (en progreso) podemos encontrar un blog dedicado a un fotografo.
-En esta pagina se podran encontrar distintos link:
+This projects was made by Matias Viaggio as a FinalProject for CoderHouse's python course.
+In this project you will find a webite made for an artist.
+This website conteins the following urls:
     • admin/
     • appBlog/ [name='index']
     • appBlog/ home [name='home']
@@ -35,29 +35,59 @@ En esta pagina se podran encontrar distintos link:
     • appBlog/ userEdit/ [name='userEdit']
 
 Admin:
-    Da acceso a la base de datos y administracion de la pagina, en la misma se podran administrar usuarios, estudiantes inscriptos, reservas de trabajos y cursos que se quieran enseñar.
-    Para acceder a esta direccion debe ingresar con los datos de inicio de etapa BETA (se recomienda cambiar estos datos en oden de ser mas seguro):
+    At this url you can access the admin panel, where you can administrate all user whit their profile images, couses, reservations, students. To access this information you will need superuser profile, the default profile is the following:
+
         username: admin
         password: admin
 
+    However i strongly recomend to change this in order to create one safer.
+
+
 appBlog:
-    Es la pagina de inicio.
+    This is the default home page for those who are NOT logged in.
+
+appBlog/home:
+    This is the home page for all users who already have an account.
+
+appBlog/adminPage:
+    This page is only for superusers, here you can access the information without leaving the website, such as:
+    • appBlog/ courseAdmin [name='courseAdmin']
+    • appBlog/ search/
+    • appBlog/ resultadoBusqueda [name='resultadoBusqueda']
+    • appBlog/ course/list [name='courseList']
+    • appBlog/ ^courseDetail(?P<pk>\d+)$ [name='CourseDetail']
+    • appBlog/ ^newCourse$ [name='NewCourse']
+    • appBlog/ ^courseEdit/(?P<pk>\d+)$ [name='CourseEdit']
+    • appBlog/ ^courseDelete/(?P<pk>\d+)$ [name='CourseDelete']
+    • appBlog/ book/list [name='bookList']
+    • appBlog/ ^bookDetail/(?P<pk>\d+)$ [name='BookDetail']
+    • appBlog/ ^bookEdit/(?P<pk>\d+)$ [name='BookEdit']
+    • appBlog/ ^bookDelete/(?P<pk>\d+)$ [name='BookDelete']
+    • appBlog/ students/list [name='studentList']
+    • appBlog/ ^studentDetails/(?P<pk>\d+)$ [name='StudentDetail']
+    • appBlog/ ^studentDelete/(?P<pk>\d+)$ [name='StudentDelete']
 
 appBlog/about_developer:
-    Es la pagina pensada para mostrar informacion del desarrollador del sitio.
+    Here you will find the information about me (devloper).
 
 appBlog/about_me:
-    Es la pagina pensada para mostrar informacion sobre el artista dueño de la pagina.
+    Here you will find the information about the owner of the website.
 
-appBlog/serEstudiante:
-    Es la pagina donde se pueden inscribir futuros alumnos que deseen asistir a clases.
+appBlog/beStudent:
+    Here is where future students will aply in order to get access to some classes
 
-appBlog/addCursos:
-    Esta pagina es solo para el administrador y para el dueño del sitio, en la misma se podra AñADIR cursos y tambien BUSCAR cursos por su codigo.
-
-
+appBlog/unauthorized:
+    This is the view that will be display when an unauthorized user try to access appBlog/adminPage.
 
 
+############################################################################################################
+                                                IMPORTANT
+############################################################################################################
+
+In case you didn't read all of these, here's again the superuser username and password:
+
+u: admin
+p: admin
 
 
 
