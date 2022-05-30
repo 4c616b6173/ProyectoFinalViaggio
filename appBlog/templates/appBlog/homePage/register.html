@@ -18,22 +18,27 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">Login</h2>
+					<h2 class="heading-section">Register</h2>
 				</div>
 			</div>
 			<div class="row justify-content-center">
-				<div class="col-md-6 col-lg-4">
-					<div class="login-wrap p-0">
-		      	<h3 class="mb-4 text-center">Register a superuser.</h3>
-				<div class="form-group">
-					<form action="" method="POST">{% csrf_token %}
+					<div class="col-md-6 col-lg-4">
+						<div class="login-wrap p-0">
+					<h3 class="mb-4 text-center">Register a superuser.</h3>
+					<div class="form-group">
+						<center>
+							<form action="" method="POST">{% csrf_token %}
 
-                        {{form.as_p}}
-                        
-                        <button type="submit">Registrate</button>
-                        
-                    </form>
-				</div>
+								{{form.as_p}}
+								
+								<button type="submit">Registrate</button>
+								<p class="loginhere">
+									If you already have an account please <a href="{% url 'login' %}" class="loginhere-link">login</a>
+								</p>
+								<a href="{% url 'index' %}" class="loginhere-link">Home</a>
+							</form>
+						</center>
+					</div>
 	          <!-- <center><a class="w-100 text-center" href="https//www.facebook.com">&mdash; Register &mdash;</a></center> -->
 		      </div>
 				</div>

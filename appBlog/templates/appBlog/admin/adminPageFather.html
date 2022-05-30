@@ -15,6 +15,8 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'appBlog/css/styles.css' %}" rel="stylesheet" />
+        <!--Scroll animation-->
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -31,7 +33,7 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'aboutDeveloper' %}"><center>About Developer</center></a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'beStudent' %}"><center>Sing Up</center></a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'apply' %}"><center>Book Me</center></a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'projects' %}">Projects</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'projects' %}"><center>Projects</center></a></li>
                         {% if not user.is_authenticated %}
 
                         <a class="nav-link" href="{% url 'login' %}">Login</a>
@@ -67,21 +69,19 @@
         </nav>
         <!-- Masthead-->
         <header class="masthead">
-            <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
-                <div style="color: white" class="d-flex justify-content-center">
-                    <center>
-                        <br><br><br><br><br>
-                        <p>Name: <i>{{book.name}} {{book.lastname}}</i></p>
-                        <p>Mail: <i>{{book.mail}}</i></p>
-                        <p>Event: <i>{{book.event}}</i></p>
-                        <p>
-                            <a href="{% url 'bookList' %}">Back</a>
-                        </p>
-                    </center>
+            <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center" data-aos="zoom-in-down" data-aos-duration="1250">
+                <div class="d-flex justify-content-center">
+                    <div class="text-center">
+                        <a class="btn btn-primary" href="{% url 'courseAdmin' %}" class="loginhere-link">Course Admin</a>
+                        <a class="btn btn-primary" href="{% url 'courseList' %}" class="loginhere-link">Courses List</a>
+                        <a class="btn btn-primary" href="{% url 'bookList' %}" class="loginhere-link">Reservations List</a>
+                        <a class="btn btn-primary" href="{% url 'studentList' %}" class="loginhere-link">Students List</a>
+                    </div>
                 </div>
             </div>
         </header>
-        
+        <!-- Footer-->
+        <!-- <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5"></div></footer> -->
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
@@ -91,5 +91,22 @@
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script>
+            AOS.init();
+          </script>
+        <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+        <script>
+            var scroll = new SmoothScroll('a[href*="#contact"]');
+            var scroll = new SmoothScroll('a[href*="#contact"]', {
+                speed: 3000
+            });
+        </script>
+        <script src="locomotive-scroll.min.js"></script>
+        <script>
+            (function () {
+                var scroll = new LocomotiveScroll();
+            })();
+        </script>
     </body>
 </html>

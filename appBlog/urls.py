@@ -3,8 +3,9 @@ from appBlog import views
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
-    path('', views.home),
+    path('', views.home, name='index'),
     path('home', views.homeLogin, name='home'),
+    path('adminPage', views.adminPage, name='adminPage'),
     path('aboutDeveloper', views.aboutDeveloper, name='aboutDeveloper'),
     path('aboutMe', views.aboutMe, name='aboutMe'),
     path('beStudent', views.beStudent, name='beStudent'),
@@ -13,6 +14,7 @@ urlpatterns = [
     path('resultadoBusqueda', views.search, name='resultadoBusqueda'),
     path('projects/', views.projects, name='projects'),
     path('apply/', views.apply, name='apply'),
+    path('unauthorized', views.unauthorized, name='unauthorized'),
     #URL LISTA DE CURSOS:
     path('course/list', views.CourseList.as_view(), name='courseList'),
     re_path(r'^courseDetail(?P<pk>\d+)$', views.CourseDetail.as_view(), name='CourseDetail'),

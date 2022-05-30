@@ -1,7 +1,7 @@
 from email import message
 from pyexpat.errors import messages
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 from appBlog.forms import CourseForm, StudentForm, UserRegisterForm, BookForm
 from appBlog.models import Avatar, Course, Student, Book
@@ -62,7 +62,7 @@ def loginRequest(request):
 
                 login(request, user1)
 
-                return render(request, 'appBlog/homePage/index.html', {'mensaje':f'Bienvenido{user1}.'})
+                return redirect('home')
 
         else:
             return render(request, 'appBlog/homePage/index.html', {'mensaje':f'Error. Datos incorrectos.'})
@@ -84,6 +84,12 @@ def homeLogin(request):
 
     avatars = Avatar.objects.filter(user=request.user.id)
     return render(request, 'appBlog/homePage/index.html', {'url':avatars[0].image.url})
+
+@login_required
+@allowed_users(allowed_roles=['admin'])
+def adminPage(request):
+    avatars = Avatar.objects.filter(user=request.user.id)
+    return render(request, 'appBlog/admin/adminPage.html', {'url':avatars[0].image.url})
 
 @login_required
 @allowed_users(allowed_roles=['admin', 'users'])
@@ -217,6 +223,9 @@ def userEdit(request):
 
     return render(request, 'appBlog/profiles/editProfile.html',{'form':form, 'userE':user.username})
 
+def unauthorized(request):
+    
+    return render(request, 'appBlog/blank/unauthorized.html')
 #================================================================================================================================
 #Lista de cursos:
 #================================================================================================================================
@@ -279,7 +288,7 @@ class BookUpdate(LoginRequiredMixin, UpdateView):
 
     success_url = '/appBlog/book/list'
 
-    fields = ['nombre', 'apellido', 'correo', 'evento']
+    fields = ['name', 'lastname', 'mail', 'event']
 
 class BookDelete(LoginRequiredMixin, DeleteView):
 
@@ -320,102 +329,3 @@ class StudentDelete(LoginRequiredMixin, DeleteView):
 
 
 
-
-
-
-
-
-
-# Lista antigua de modelo Curso
-# def listaCursos(request):
-    
-#     cursos = Curso.objects.all()
-#     contexto = {"cursos":cursos}
-#     return render(request, "appBlog/listas/listaDeCursos.html",contexto)
-
-# def borrarCurso(request, curso_nombre):
-    
-#     curso = Curso.objects.get(nombre=curso_nombre)
-    
-#     curso.delete()
-    
-#     cursos = Curso.objects.all()
-
-#     contexto = {'cursos':cursos}
-
-#     return render(request, "appBlog/listas/listaDeCursos.html",contexto)
-
-# def editarCursos(request, curso_nombre):
-
-#     curso = Curso.objects.get(nombre=curso_nombre)
-
-#     if request.method == 'POST':
-        
-#         editarCForm = CursoFormulario(request.POST)
-
-#         if editarCForm.is_valid():
-
-#             informacion = editarCForm.cleaned_data
-
-#             curso.nombre= informacion['nombre']
-#             curso.codigo= informacion['codigo']
-#             curso.duracion= informacion['duracion']
-
-#             curso.save()
-
-#             return render(request, 'appBlog/homePage/index.html')
-
-#     else:
-
-#         editarCForm = CursoFormulario(initial={'nombre':curso.nombre, 'codigo':curso.codigo, 'duracion':curso.duracion})
-
-#     return render(request, 'appBlog/listas/editarCurso.html', {'editarCForm':editarCForm, 'curso_nombre':curso_nombre})
-
-
-
-#LISTAS VIEJAS DE RESERVAS:
-
-# def listaReservas(request):
-    
-#     reservas = Reserva.objects.all()
-#     contexto = {"reservas":reservas}
-#     return render(request, "appBlog/listas/listaDeReservas.html",contexto)
-
-# def borrarReserva(request, reserva_nombre):
-    
-#     reserva = Reserva.objects.get(nombre=reserva_nombre)
-    
-#     reserva.delete()
-    
-#     reservas = Reserva.objects.all()
-
-#     contexto = {'reservas':reservas}
-
-#     return render(request, "appBlog/listas/listaDeReservas.html",contexto)
-
-# def editarReservas(request, reserva_nombre):
-
-#     reserva = Reserva.objects.get(nombre=reserva_nombre)
-
-#     if request.method == 'POST':
-        
-#         miFormulario = ReservasFormulario(request.POST)
-
-#         if miFormulario.is_valid():
-
-#             informacion = miFormulario.cleaned_data
-
-#             reserva.nombre= informacion['nombre']
-#             reserva.apellido= informacion['apellido']
-#             reserva.duracion= informacion['correo']
-#             reserva.duracion= informacion['evento']
-
-#             reserva.save()
-
-#             return render(request, 'appBlog/homePage/index.html')
-
-#     else:
-
-#         miFormulario = ReservasFormulario(initial={'nombre':reserva.nombre, 'apellido':reserva.apellido, 'correo':reserva.correo, 'evento':reserva.evento})
-
-#     return render(request, 'appBlog/listas/editarReserva.html', {'miFormulario':miFormulario, 'reserva_nombre':reserva_nombre})
