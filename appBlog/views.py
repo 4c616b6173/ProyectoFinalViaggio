@@ -8,7 +8,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -159,6 +159,32 @@ def search(request):
         respuesta = 'Wrong data'
 
     return HttpResponse(respuesta)
+
+def userEdit(request):
+    
+    user = request.user
+
+    if request.method == 'POST':
+
+        form = UserRegisterForm(request.POST)
+
+        if form.is_valid():
+
+            information = form.cleaned_data
+
+            user.username = information['username']
+            user.email = information['email']
+            user.password1 = information['password1']
+            user.password2 = information['password2']
+
+            user.save()
+
+            return render(request,'appBlog/homePage/index.html')
+
+    else:
+        form = UserRegisterForm(initial={'username':user.username, 'email':user.username})
+
+    return render(request, 'appBlog/profiles/editProfile.html',{'form':form, 'userE':user.username})
 
 #================================================================================================================================
 #Lista de cursos:

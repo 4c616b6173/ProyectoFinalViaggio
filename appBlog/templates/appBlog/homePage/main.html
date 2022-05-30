@@ -34,9 +34,18 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'beStudent' %}">Sing Up</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'apply' %}">Book Me</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" href="login">Login</a></li>
-                        <li class="nav-item"><a class="nav-link" href="register">Register</a></li>
-                        <li class="nav-item"><a class="nav-link" href="logout">Logout</a></li>
+                        {% if not user.is_authenticated %}
+
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+
+                        {% endif %}
+
+                        {% if user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link"><p>Welcome, {{user.username}}!</p></a></li>
+                        <a class="nav-link" href="logout">Logout</a>
+
+                        {% endif %}
                     </ul>
                 </div>
             </div>

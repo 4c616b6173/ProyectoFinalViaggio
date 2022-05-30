@@ -1,0 +1,22 @@
+{% extends 'appBlog/blank/blankPadre.html' %}
+
+{% load static %}
+
+{% block contenidoblock %}
+
+
+
+<form action="" method="POST">{% csrf_token %}
+
+    <h2>Edit user:</h2>
+    <table>
+
+        {{ form.as_table }}
+
+    </table>
+
+    <input type="submit", value="Submit">
+
+</form>
+
+{% endblock %}
