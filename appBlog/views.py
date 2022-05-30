@@ -117,8 +117,8 @@ def apply(request):
     return render(request, 'appBlog/apply/apply.html', {'bookF':bookF})
 
 def projects(request):
-    avatars = Avatar.objects.filter(user=request.user.id)
-    return render(request, 'appBlog/projects/projects.html', {'url':avatars[0].image.url})
+
+    return render(request, 'appBlog/projects/projects.html')
 
 def aboutDeveloper(request):
     avatars = Avatar.objects.filter(user=request.user.id)
