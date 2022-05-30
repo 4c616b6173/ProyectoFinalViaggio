@@ -29,12 +29,38 @@
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="{% url 'aboutMe' %}"><center>About Me</center></a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'aboutDeveloper' %}"><center>About Developer</center></a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'beStudent' %}">Sing Up</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'apply' %}">Book Me</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'beStudent' %}"><center>Sing Up</center></a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'apply' %}"><center>Book Me</center></a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'projects' %}">Projects</a></li>
-                        <li class="nav-item"><a class="nav-link" href="login">Login</a></li>
-                        <li class="nav-item"><a class="nav-link" href="register">Register</a></li>
-                        <li class="nav-item"><a class="nav-link" href="logout">Logout</a></li>
+                        {% if not user.is_authenticated %}
+
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+
+                        {% endif %}
+
+                        {% if user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link">
+                            <div class='text-center' align="right">
+                                <img align="right" class="profile-picture" height="50px" src="{{url}}">
+                            </div>
+                        </a></li>
+                        <li class="nav-item"><a class="nav-link">
+                            <center>
+                                <p>Welcome {{user.username}}</p>
+                            </center>
+                        </a></li>
+
+                        {% with first_image=user.avatar_set.first %} 
+                            {% if first_image %} 
+                                <a href="{{ first_image.imagen.url }}" target="_blank">
+                                <img src="{{ first_image.imagen.url }}" height="40px">
+                            {% endif %}
+                        {% endwith %}
+                        
+                        <a class="nav-link" href="logout"><center>Logout</center></a>
+
+                        {% endif %}
                     </ul>
                 </div>
             </div>
