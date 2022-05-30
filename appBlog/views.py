@@ -121,12 +121,12 @@ def projects(request):
     return render(request, 'appBlog/projects/projects.html')
 
 def aboutDeveloper(request):
-    avatars = Avatar.objects.filter(user=request.user.id)
-    return render(request, 'appBlog/about/aboutDeveloper.html', {'url':avatars[0].image.url})
+    
+    return render(request, 'appBlog/about/aboutDeveloper.html')
 
 def aboutMe(request):
-    avatars = Avatar.objects.filter(user=request.user.id)
-    return render(request, 'appBlog/about/aboutMe.html', {'url':avatars[0].image.url})
+   
+    return render(request, 'appBlog/about/aboutMe.html')
 
 @login_required
 @allowed_users(allowed_roles=['admin', 'users'])
